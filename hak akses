@@ -1,0 +1,27 @@
+<?php
+session_start();
+include 'koneksi/koneksi.php'; 
+function getMenuByHakAkses($id_level, $koneksi) {
+    $query = "SELECT m.* FROM menu m
+              JOIN hak_akses ha ON m.id_menu = ha.id_menu
+              WHERE ha.id_level = $id_level
+              AND m.aktif = 'Y'
+              ORDER BY m.urutan";
+
+    $result = mysqli_query($koneksi, $query);
+    $menu = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $menu[] = $row;
+    }
+    return $menu;
+}
+if (isset($_SESSION['id_level'])) {
+    $id_level = $_SESSION['id_level'];
+    $menu = getMenuByHakAkses($id_level, $koneksi); 
+} else {
+   
+    header("Location: index"); 
+    exit();
+}
+?>
+

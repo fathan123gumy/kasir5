@@ -1,0 +1,25 @@
+<?php
+session_start();
+include 'koneksi/koneksi.php';
+
+if (!isset($_SESSION['id_level'])) {
+    header("Location: ../index");
+    exit();
+}
+
+if ($_SESSION['id_level'] != 111) {
+    header("Location: ../index");
+    exit();
+}
+
+if (!isset($_SESSION['id_level'])) {
+    header("Location: ../index");
+    exit();
+}
+
+if ($_SESSION['id_level'] != 222) {
+    header("Location: ../index2.html");
+    exit();
+}
+
+?>
